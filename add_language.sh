@@ -4,8 +4,12 @@
 # weblate discovers files which have been added to Git automatically
 # Just create them and then add them.
 lang="ar"
+WEBLATE_DIR="/var/www/weblate"
+WEBLATE_VCS_DIR="$WEBLATE_DIR/data/vcs/project/index"
 
-# start script
+cd $WEBLATE_VCS_DIR
+
+# copy pot files
 ret=0
 FILES=`find . -type f -iname '*.pot'`
 for file in $FILES ; do
@@ -21,4 +25,9 @@ for file in $FILES ; do
     echo $newfile || ret=$?
     msginit -l $lang --no-translator -i $file  -o $newfile || ret=$?
 done
+
+# setup language
+cd $WEBLATE_DIR
+./manage.py setuplang $lang
+
 exit "$ret"
