@@ -1,0 +1,8 @@
+sudo mkdir /media/ramdisk
+sudo chmod 777 /media/ramdisk
+sudo mount -t tmpfs none /media/ramdisk
+
+
+# or in fstab:
+https://wiki.ubuntu.com/PbuilderHowto#tmpfs
+tmpfs           /var/cache/pbuilder/build               tmpfs        defaults,size=2400M        0       0

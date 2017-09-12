@@ -1,0 +1,2 @@
+# generates a visual feedback about bootup routines
+systemd-analyze plot > plot.sg

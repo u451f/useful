@@ -1,0 +1,49 @@
+#https://wiki.ubuntu.com/PbuilderHowto
+
+sudo apt install pbuilder build-essential devscripts apt-show-versions vim screen dupload
+sudo apt install debian-archive-keyring -t unstable
+
+# sudo might be needed to execute pbuilder
+
+# get a good pbuilderrc and link it to relevant places
+ln -s /root/.pbuilderrc pbuilderrc
+ln -s ~/.pbuilderrc pbuilderrc
+
+cd /var/cache/pbuilder
+mkdir /var/cache/pbuilder/hook.d/
+sudo pbuilder create
+# create a machine for a specific distribution
+# sudo DIST=unstable pbuilder create
+# Create a machine with a different architecture:
+# sudo DIST=unstable ARCH=i386 pbuilder create
+
+mkdir ~/debian
+cd ~/debian
+debcheckout packagename
+cd packagename
+dch -i
+
+# build
+DIST=unstable pdebuild
+# or
+DIST=unstable gbp buildpackage
+
+# get results
+ls /var/cache/pbuilder/
+
+# verify files with lintian
+lintian --pedantic --info /var/cache/pbuilder/unstable-amd64/results/xxx.dsc
+
+## simple backport
+# get files here with "dget .dsc"
+# cd repo, then "dch"
+# then build bpo
+
+# build using *your* environment
+debuild -S  # need to be outside of repo
+
+# or build in chroot, better!
+DIST=stable pdebuild # need to be inside repo
+
+# upload pkg to mentors
+dupload --to mentors

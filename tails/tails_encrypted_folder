@@ -1,0 +1,43 @@
+Using Tails.
+Boot with persistence enabled and root password.
+
+Open a terminal.
+Type:
+	sudo -s
+Type your root password.
+
+	cd Persistence
+
+Create a container file with random bits:
+	dd if="/dev/urandom" of="/home/amnesia/Persistent/secret" bs=1M count=100
+
+... where "100" is the size in Megabytes
+
+Mount this file to a loop device:
+	losetup /dev/loop1 /home/amnesia/Persistent/secret
+
+Then go to Applications -> System tools -> disk utility
+
+Click on .secret on the left hand side.
+Then click on "Format volume". Use ext4 and click on "Encrypt underlying device".
+You should then see 2 "partitions".
+
+
+This is all for the initial setup.
+====================================================
+
+Click on the one named "secret Ext4".
+Then on the button "Mount volume"
+
+You can now add files to that volume.
+
+====================================================
+After rebooting.
+Boot with persistence enabled and root password.
+
+Mount your encrypted container to a loop device:
+	sudo losetup /dev/loop1 /home/amnesia/Persistent/secret
+
+You can now open the file browser Nautilus. (Click on "Places" for example)
+You'll see "XXX MB Encrypted" in the left sidebar.
+Click on this and you will now be asked to enter your passphrase.
