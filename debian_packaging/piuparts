@@ -1,0 +1,4 @@
+# this uses /etc/apt/sources.list of the host machine
+# may thus fail when apt-transport-tor is enabled
+# use pbuilder chroot
+piuparts -b /var/cache/pbuilder/unstable-amd64-base.tgz -p $1.deb

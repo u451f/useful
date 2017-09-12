@@ -1,0 +1,6 @@
+dpkg -L <pkgname>
+dpkg --info <file.deb>
+dpkg --contents <file.deb>
+
+# one can also extract ar@
+ar x xul-ext-cryptocat_2.2.2-1_all.deb

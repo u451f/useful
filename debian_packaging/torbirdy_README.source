@@ -1,0 +1,42 @@
+# test if xpi build works
+# make -f debian/rules build
+# make -f debian/rules clean
+
+# this needs to be done only once, for setup
+debcheckout -a torbirdy
+cd torbirdy
+git fetch origin
+git checkout pristine-tar
+git remote add torbirdy-upstream https://git.torproject.org/torbirdy.git
+git fetch torbirdy-upstream
+
+# This needs to be done everytime
+git fetch origin
+git fetch torbirdy-upstream
+
+export VERSION="0.2.0"
+# verify the tag's GPG signature
+git verify-tag -v ${VERSION}
+
+# checkout & export latest signed upstream tag
+git checkout $VERSION
+git archive --prefix="torbirdy-${VERSION}/" --output="../torbirdy_${VERSION}.orig.tar.gz" $VERSION
+# or:
+git checkout debian/sid
+uscan --download # this will also verify the XPI signature.
+
+# in any case, now:
+git checkout debian/sid
+
+# Possibility1: Import the tarball
+gbp import-orig --upstream-vcs-tag=${VERSION} --pristine-tar "../torbirdy_${VERSION}.orig.tar.gz"
+
+# Possibility2: Merge current release
+# git merge $VERSION
+dch -i
+git commit debian/changelog
+
+# build
+gbp buildpackage
+git tag -s debian/$VERSION-1
+git push origin master && git push origin --tags

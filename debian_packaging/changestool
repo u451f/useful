@@ -1,0 +1,10 @@
+# This is useful to manipulate .changes files after building a package
+# apt install reprepro
+
+# checksums don't match
+changestool bla.changes updatechecksums
+debsign bla.changes
+
+# orig.tar.gz is missing from changesfile
+changestool bla.changes includeallsources
+debsign bla.changes

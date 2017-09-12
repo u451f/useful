@@ -1,0 +1,10 @@
+# https://wiki.debian.org/PackagingWithGit
+
+DIST=unstable pbuilder create
+DIST=unstable pbuilder update
+DIST=unstable pbuilder login --save-after-login
+
+# Example calls:
+
+BUILDER=pbuilder gbp buildpackage --git-pbuilder --git-ignore-new --git-dist=unstable
+BUILDER=pbuilder DIST=unstable ARCH=i386 gbp buildpackage --git-pbuilder

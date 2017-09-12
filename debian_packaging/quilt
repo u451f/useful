@@ -1,0 +1,8 @@
+https://wiki.debian.org/UsingQuilt
+
+quilt push -a
+quilt new bla.diff
+quilt add file_to_patch
+quilt edit file_to_patch
+quilt refresh
+quilt pop -a
