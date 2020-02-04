@@ -1,0 +1,3 @@
+# serves local directory on port 8000
+# python3 -m http.server --help
+python3 -m http.server
