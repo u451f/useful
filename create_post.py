@@ -55,7 +55,7 @@ for folder in folders:
     f.write ("thumbnail: %s" % (first_thumb))
     f.write ("\r\n---\r\n")
 
-    for image, thumb in imgs.items():
+    for image, thumb in sorted (imgs.items()):
         # print (image, thumb)
         f.write ('<a href="{{ site.url }}/%s/%s"><img src="{{ site.url }}/%s/%s" alt=""></a>' % (folder, image, folder, thumb))
         # f.write ('<img class="swiper-slide" src="{{ site.url }}/%s/%s" alt="" />' % (folder, image))
