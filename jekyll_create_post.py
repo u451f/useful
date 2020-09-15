@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# This will create a post from a folder with images for Jekyll.
+# I use this to migrate websites to Jekyll quickly.
+
 # The file should be executed from the root of jekyll
 # The post name will be the image folder name, so
 # make sure to name it according to the scheme yyyy-mm-dd-title
@@ -27,7 +30,7 @@ for folder in folders:
     # get all the jpg files from the current folder and create a thumbnail
     # add all files to a dict
     imgs = {}
-    for inputfile in glob.glob("*.jpg"):
+    for inputfile in glob.glob("*.jpg", "*.png"):
         outputfile = os.path.splitext(inputfile)[0] + "-thumb.jpg"
         imgs[inputfile] = outputfile
         if inputfile != outputfile:
