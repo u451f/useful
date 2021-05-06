@@ -24,7 +24,7 @@ Make sure you installed git-remote-crypt.
 
 Configure locally to use that key:
 
-    vi .ssh/config
+    vi ~/.ssh/config
 
 In the file add:
 
